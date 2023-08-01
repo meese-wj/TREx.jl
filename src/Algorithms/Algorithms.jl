@@ -1,0 +1,3 @@
+module Algorithms
+
+end # Algorithms

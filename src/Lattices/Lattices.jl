@@ -1,0 +1,3 @@
+module Lattices
+
+end # Lattices

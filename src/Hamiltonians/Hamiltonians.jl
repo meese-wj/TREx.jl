@@ -1,0 +1,3 @@
+module Hamiltonians
+
+end # Hamiltonians

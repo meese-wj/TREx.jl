@@ -1,5 +1,8 @@
 module TREx
 
-# Write your package code here.
+include("Parameters/Parameters.jl")
+include("Hamiltonians/Hamiltonians.jl")
+include("Lattices/Lattices.jl")
+include("Simulations/Simulations.jl")
 
 end
