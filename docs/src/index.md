@@ -2,7 +2,7 @@
 CurrentModule = TREx
 ```
 
-# TREx
+# TREx.jl
 
 Documentation for [TREx](https://github.com/meese-wj/TREx.jl).
 
