@@ -22,8 +22,8 @@ In our view, any Monte Carlo simulation can be disected into a set of interactin
 
 1. [`Parameters`](src/Parameters/): the data structures that act as experimental knobs with which one tunes a simulation.
 1. [`Models`](src/Models): the data structure that contains all relevant information for the system being simulated. The `model`s encapsulate the following data structures:
-    1. [`Lattices`](src/Lattices/): the underlying geometry in which a system evolves during a simulation.
-    1. [`Hamiltonians`](src/Hamiltonians/): the data structure that contains all of a system's degrees of freedom and how they interact amongst themselves. (In many ways this *defines* the system itself.)
+    1. [`Lattices`](src/Models/Lattices/): the underlying geometry in which a system evolves during a simulation.
+    1. [`Hamiltonians`](src/Models/Hamiltonians/): the data structure that contains all of a system's degrees of freedom and how they interact amongst themselves. (In many ways this *defines* the system itself.)
     1. [`Observables`](src/Models/Observables): the thermodynamic quantities to be sampled during the Monte Carlo simulation.
 1. [`Algorithms`](src/Algorithms/): the Monte Carlo methods used to define individual time-steps in the simulation. These also update the system itself.
 1. [`Simulations`](src/Simulations/): the set of `main` functions that actually perform a simulation.
