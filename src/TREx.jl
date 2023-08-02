@@ -9,5 +9,6 @@ include("Models/Models.jl")
 @reexport using .Models  # have direct access to Models/submodules
 
 include("Simulations/Simulations.jl")
+export Simulations
 
 end
