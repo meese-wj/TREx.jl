@@ -1,9 +1,8 @@
 module Simulations
 
-export thermalize, run_and_record
+import ..TREx: thermalization_sweeps, measurement_sweeps
 
-thermalization_sweeps(params) = params.therm_sweeps
-measurement_sweeps(params) = params.mc_sweeps
+export thermalize, run_and_record
 
 abstract type AbstractMCProcedure end
 struct Thermalization <: AbstractMCProcedure end

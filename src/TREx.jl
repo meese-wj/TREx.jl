@@ -4,6 +4,9 @@ module TREx
 using Reexport
 
 include("Parameters/Parameters.jl")
+import .Parameters: thermalization_sweeps, measurement_sweeps
+export Parameters
+export thermalization_sweeps, measurement_sweeps
 
 include("Models/Models.jl")
 @reexport using .Models  # have direct access to Models/submodules
