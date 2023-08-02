@@ -26,7 +26,7 @@ In our view, any Monte Carlo simulation can be disected into a set of interactin
 1. [`Algorithms`](src/Algorithms/): the Monte Carlo methods used to define individual time-steps in the simulation. These also update the system itself.
 1. [`Simulations`](src/Simulations/): the set of `main` functions that actually perform a simulation.
 
-Each of these pieces are defined through a series of methods and types whose implementations are independent. Because of this, each of these pieces are separated as submodules (in the Julian sense). We also deliberately choose to trap the exported names from these submodules within `TREx`. This reduces the amount of clutter in the namespace, even though I admit that needing to write things, like `Hamiltonians.Ising` may get annoying at times. 😋
+Each of these pieces are defined through a series of methods and types whose implementations are independent. Because of this, each of these pieces are separated as submodules (in the Julian sense). We also deliberately choose to trap the exported names from these submodules within `TREx`. This reduces the amount of clutter in the namespace, even though I admit that needing to write things, like `Hamiltonians.Ising` may get annoying at times. 🙃
 
 ## Citing 
 
