@@ -4,7 +4,7 @@ module Models
 using Reexport
 
 include("Lattices/Lattices.jl")
-@reexport using .Lattices
+export Lattices
 
 include("Hamiltonians/Hamiltonians.jl")
 @reexport using .Hamiltonians
