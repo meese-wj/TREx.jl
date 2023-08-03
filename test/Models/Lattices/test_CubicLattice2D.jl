@@ -41,6 +41,8 @@ using TREx
     @time @testset "Structure" begin
         @test Lattices.num_sites(latt) == 16
         @test size(latt.neighbors) == (16, 4)
+        @test all( size(latt) .== (4, 4) )
+        @test all( size(latt) .== size(Lattices.parameters(latt)) )
     end
     println()
 
