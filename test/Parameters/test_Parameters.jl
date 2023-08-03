@@ -1,6 +1,7 @@
 using Test
 using TREx
 
+@info "TREx/Parameters.jl"
 @testset "TREx/Parameters.jl" begin
     
     @testset "Type Hierarchy" begin

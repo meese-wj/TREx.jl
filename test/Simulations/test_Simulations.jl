@@ -1,6 +1,7 @@
 using Test
 using TREx
 
+@info "TREx/Simulations.jl"
 @testset "TREx/Simulations.jl" begin 
 
     @testset "Procedures" begin 
