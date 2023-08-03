@@ -9,7 +9,7 @@ struct CubicLattice2DParams
     Lx::Int
     Ly::Int
 end
-reciprocal_type(::Type{CubicLattice2DParams}) = CubicLattice2D
+# reciprocal_type(::Type{CubicLattice2DParams}) = CubicLattice2D
 size(lattparams::CubicLattice2DParams) = (lattparams.Lx, lattparams.Ly)
 
 struct CubicLattice2D <: AbstractCubicLattice
