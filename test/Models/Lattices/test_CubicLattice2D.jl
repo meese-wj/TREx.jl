@@ -4,6 +4,15 @@ using TREx
 @info " ↳ Testing CubicLattice2D..."
 @time @testset "CubicLattice2D" begin
     latt = Lattices.CubicLattice2D( 4, 4 )
+    params = Lattices.parameters(latt)
+    
+    println("  Testing Parameters")
+    @time @testset "Parameters" begin
+        @test params.Lx == 4
+        @test params.Ly == 4
+        @test all( size(params) .== (4, 4) )     
+        @test all( size(Lattices.parameters(latt)) .== (4, 4) )     
+    end
 
     println("  Testing Structure")
     @time @testset "Structure" begin
