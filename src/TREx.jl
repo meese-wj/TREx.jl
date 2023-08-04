@@ -11,6 +11,9 @@ export thermalization_sweeps, measurement_sweeps
 include("Models/Models.jl")
 @reexport using .Models  # have direct access to Models/submodules
 
+include("Algorithms/Algorithms.jl")
+@reexport using .Algorithms # have direct access to all Algorithms
+
 include("Simulations/Simulations.jl")
 export Simulations
 
