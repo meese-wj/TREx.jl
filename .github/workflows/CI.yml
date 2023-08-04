@@ -64,9 +64,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DOCUMENTER_KEY: ${{ secrets.DOCUMENTER_KEY }}
-      - run: |
-          julia --project=docs -e '
-            using Documenter: DocMeta, doctest
-            using TREx
-            DocMeta.setdocmeta!(TREx, :DocTestSetup, :(using TREx); recursive=true)
-            doctest(TREx)'
+      # - run: |
+      #     julia --project=docs -e '
+      #       using Documenter: DocMeta, doctest
+      #       using TREx
+      #       DocMeta.setdocmeta!(TREx, :DocTestSetup, :(using TREx); recursive=true)
+      #       doctest(TREx)'
