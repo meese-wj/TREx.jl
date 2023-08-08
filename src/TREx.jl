@@ -1,4 +1,4 @@
-module TREx
+module TRExMC
 
 # Use this to reexport the namespaces from each submodule
 using Reexport

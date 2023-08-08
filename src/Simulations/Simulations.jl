@@ -1,6 +1,6 @@
 module Simulations
 
-import ..TREx: thermalization_sweeps, measurement_sweeps
+import ..TRExMC: thermalization_sweeps, measurement_sweeps
 
 export thermalize, run_and_record
 

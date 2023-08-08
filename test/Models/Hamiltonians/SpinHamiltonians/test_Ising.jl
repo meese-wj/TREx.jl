@@ -1,5 +1,5 @@
 using Test
-using TREx
+using TRExMC
 
 @info "  ↳ Testing Ising..."
 @testset "Ising.jl" begin

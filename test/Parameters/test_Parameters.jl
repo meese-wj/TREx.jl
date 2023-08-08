@@ -1,15 +1,15 @@
 using Test
-using TREx
+using TRExMC
 
-@info "TREx/Parameters.jl"
-@testset "TREx/Parameters.jl" begin
+@info "TRExMC/Parameters.jl"
+@testset "TRExMC/Parameters.jl" begin
     
     @testset "Type Hierarchy" begin
         let 
             struct TestSimParams <: Parameters.SimulationParameters end
             
-            TREx.thermalization_sweeps(p::TestSimParams) = 2
-            TREx.measurement_sweeps(p::TestSimParams) = 4
+            TRExMC.thermalization_sweeps(p::TestSimParams) = 2
+            TRExMC.measurement_sweeps(p::TestSimParams) = 4
 
             @test thermalization_sweeps(TestSimParams()) == 2
             @test measurement_sweeps(TestSimParams()) == 4

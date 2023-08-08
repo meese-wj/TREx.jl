@@ -1,7 +1,7 @@
-using TREx
+using TRExMC
 using Test
 
-@testset "TREx.jl" begin
+@testset "TRExMC.jl" begin
 
     include("Parameters/test_Parameters.jl")
     include("Models/test_Models.jl")

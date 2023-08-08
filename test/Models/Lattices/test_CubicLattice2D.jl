@@ -1,5 +1,5 @@
 using Test
-using TREx
+using TRExMC
 
 @info " ↳ Testing CubicLattice2D..."
 @time @testset "CubicLattice2D" begin

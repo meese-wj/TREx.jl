@@ -1,14 +1,14 @@
 ```@meta
-CurrentModule = TREx
+CurrentModule = TRExMC
 ```
 
-# TREx.jl
+# TRExMC.jl
 
-Documentation for [TREx](https://github.com/meese-wj/TREx.jl).
+Documentation for [TRExMC](https://github.com/meese-wj/TRExMC.jl).
 
 ```@index
 ```
 
 ```@autodocs
-Modules = [TREx]
+Modules = [TRExMC]
 ```

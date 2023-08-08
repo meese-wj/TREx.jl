@@ -1,3 +1,3 @@
 [deps]
 Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
-TREx = "4c1474f5-d57d-4103-b4cd-bd216d071502"
+TRExMC = "4c1474f5-d57d-4103-b4cd-bd216d071502"

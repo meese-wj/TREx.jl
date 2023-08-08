@@ -1,5 +1,5 @@
 using Test
-using TREx
+using TRExMC
 
 @testset "CubicLattices.jl" begin
     include("test_CubicLattice2D.jl")

@@ -1,5 +1,5 @@
 using Test
-using TREx
+using TRExMC
 
 @info "↳ Testing Lattices.jl"
 @testset "Lattices.jl" begin

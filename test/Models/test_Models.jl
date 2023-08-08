@@ -1,7 +1,7 @@
 using Test
-using TREx
+using TRExMC
 
-@info "TREx/Models.jl"
+@info "TRExMC/Models.jl"
 @testset "Models.jl" begin
     include("Lattices/test_Lattices.jl")
     include("Hamiltonians/test_Hamiltonians.jl")

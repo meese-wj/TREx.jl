@@ -1,8 +1,8 @@
 using Test
-using TREx
+using TRExMC
 
-@info "TREx/Simulations.jl"
-@testset "TREx/Simulations.jl" begin 
+@info "TRExMC/Simulations.jl"
+@testset "TRExMC/Simulations.jl" begin 
 
     @testset "Procedures" begin 
         let 
@@ -11,8 +11,8 @@ using TREx
                 mc_sweeps::Int
             end
 
-            TREx.thermalization_sweeps(p::test_params) = p.therm_sweeps
-            TREx.measurement_sweeps(p::test_params) = p.mc_sweeps
+            TRExMC.thermalization_sweeps(p::test_params) = p.therm_sweeps
+            TRExMC.measurement_sweeps(p::test_params) = p.mc_sweeps
 
             test_p = test_params(10, 100)
             @test Simulations.total_sweeps(Simulations.Thermalization(), test_p) == 10

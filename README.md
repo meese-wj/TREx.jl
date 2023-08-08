@@ -2,10 +2,10 @@
 # TRExMC.jl
 ## Thermodynamics via Replica-Exchange Monte Carlo
 
-[![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://meese-wj.github.io/TREx.jl/stable/)
-[![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://meese-wj.github.io/TREx.jl/dev/)
-[![Build Status](https://github.com/meese-wj/TREx.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/meese-wj/TREx.jl/actions/workflows/CI.yml?query=branch%3Amain)
-[![Coverage](https://codecov.io/gh/meese-wj/TREx.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/meese-wj/TREx.jl)
+[![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://meese-wj.github.io/TRExMC.jl/stable/)
+[![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://meese-wj.github.io/TRExMC.jl/dev/)
+[![Build Status](https://github.com/meese-wj/TRExMC.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/meese-wj/TRExMC.jl/actions/workflows/CI.yml?query=branch%3Amain)
+[![Coverage](https://codecov.io/gh/meese-wj/TRExMC.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/meese-wj/TRExMC.jl)
 
 *A Julia package for simulating statistical mechanics with massively-parallel Monte Carlo methods.*
 
@@ -29,7 +29,7 @@ In our view, any Monte Carlo simulation can be disected into a set of interactin
 1. [`Algorithms`](src/Algorithms/): the Monte Carlo methods used to define individual time-steps in the simulation. These also update the system itself.
 1. [`Simulations`](src/Simulations/): the set of `main` functions that actually perform a simulation.
 
-Each of these pieces are defined through a series of methods and types whose implementations are independent. Because of this, each of these pieces are separated as submodules (in the Julian sense). We also deliberately choose to trap the exported names from these submodules within `TREx`. This reduces the amount of clutter in the namespace, even though I admit that needing to write things, like `Hamiltonians.Ising` may get annoying at times. 🙃
+Each of these pieces are defined through a series of methods and types whose implementations are independent. Because of this, each of these pieces are separated as submodules (in the Julian sense). We also deliberately choose to trap the exported names from these submodules within `TRExMC`. This reduces the amount of clutter in the namespace, even though I admit that needing to write things, like `Hamiltonians.Ising` may get annoying at times. 🙃
 
 ## Citing 
 
