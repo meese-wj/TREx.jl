@@ -3,9 +3,25 @@ module Hamiltonians
 using Reexport
 
 export AbstractHamiltonian,
-       AbstractDoF, location, value
+       AbstractDoF, location, value,
+       energy, DoF_energy
 
+"""
+    abstract type AbstractHamiltonian end
+
+Parent type for all Hamiltonians in the simulation.
+
+The required interface that all Hamiltonians must satisfy are 
+specified by the following functions:
+
+* `energy`: total energy of the Hamiltonian
+* `DoF_energy`: energy associated with a single [`AbstractDoF`](@ref)
+"""
 abstract type AbstractHamiltonian end
+
+energy(ham::AbstractHamiltonian, args...) = throw(ArgumentError("Energy for $(ham |> typeof) types has yet to be defined."))
+DoF_energy(ham::AbstractHamiltonian, args...) = throw(ArgumentError("Energy for $(ham |> typeof) types has yet to be defined."))
+
 
 """
     abstract type AbstractDoF end

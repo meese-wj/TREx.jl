@@ -4,9 +4,11 @@ using Configurations
 
 export thermalization_sweeps, measurement_sweeps
 
-abstract type AbstractTRExParameters end
-abstract type ModelParameters <: AbstractTRExParameters end
-abstract type SimulationParameters <: AbstractTRExParameters end
+abstract type AbstractTRExMCParameters end
+abstract type LatticeParameters <: AbstractTRExMCParameters end
+abstract type HamiltonianParameters <: AbstractTRExMCParameters end
+abstract type ModelParameters <: AbstractTRExMCParameters end
+abstract type SimulationParameters <: AbstractTRExMCParameters end
 
 thermalization_sweeps(p::SimulationParameters) = throw(ArgumentError("thermalization_sweeps have yet to be defined for $(p |> typeof) types."))
 measurement_sweeps(p::SimulationParameters) = throw(ArgumentError("measurement_sweeps have yet to be defined for $(p |> typeof) types."))
