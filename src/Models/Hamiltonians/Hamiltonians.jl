@@ -5,7 +5,7 @@ using ..Parameters
 
 export AbstractHamiltonian,
        AbstractDoF, location, value,
-       energy, DoF_energy
+       DoF, energy, DoF_energy, num_DoF
 
 """
     abstract type AbstractHamiltonian end

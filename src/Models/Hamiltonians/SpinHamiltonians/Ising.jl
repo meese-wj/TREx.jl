@@ -1,6 +1,9 @@
 
 using ..Parameters
 
+export num_DoF, location, value, BasicIsingHamiltonian
+
+
 abstract type AbstractIsingHamiltonian <: AbstractSpinHamiltonian end
 
 struct IsingDoF{T <: AbstractFloat} <: AbstractDoF
@@ -23,3 +26,5 @@ struct BasicIsingHamiltonian{T <: AbstractFloat} <: AbstractIsingHamiltonian
         return new{T}(params, rand([one(T), -one(T)], ndofs))
     end
 end
+
+num_DoF(ham::BasicIsingHamiltonian) = length(ham.spins)
