@@ -1,6 +1,7 @@
 module Hamiltonians
 
 using Reexport
+using ..Parameters
 
 export AbstractHamiltonian,
        AbstractDoF, location, value,

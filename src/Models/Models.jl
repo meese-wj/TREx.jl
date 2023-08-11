@@ -1,5 +1,7 @@
 module Models
 
+using ..Parameters
+
 include("Lattices/Lattices.jl")
 export Lattices
 
