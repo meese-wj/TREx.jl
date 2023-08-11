@@ -7,11 +7,17 @@ using TRExMC
     @testset "Testing AbstractHamiltonian" begin
         struct FakeHam <: Hamiltonians.AbstractHamiltonian end
         
+        @test_throws ArgumentError Hamiltonians.DoF(FakeHam(), 1)
+        @test_throws ArgumentError Hamiltonians.DoF(FakeHam(), 1, 42) # test args...
+        
         @test_throws ArgumentError Hamiltonians.energy(FakeHam())
         @test_throws ArgumentError Hamiltonians.energy(FakeHam(), 42) # test args...
 
         @test_throws ArgumentError Hamiltonians.DoF_energy(FakeHam())
         @test_throws ArgumentError Hamiltonians.DoF_energy(FakeHam(), 42) # test args...
+        
+        @test_throws ArgumentError Hamiltonians.num_DoF(FakeHam())
+        @test_throws ArgumentError Hamiltonians.num_DoF(FakeHam(), 42) # test args...
     end
 
     @testset "Testing AbstractDoF" begin
