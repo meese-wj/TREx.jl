@@ -21,10 +21,10 @@ specified by the following functions:
 """
 abstract type AbstractHamiltonian end
 
-DoF(ham::AbstractHamiltonian, location, args...) = throw(ArgumentError("DoF for $(ham |> typeof) at location $(location)::$(location |> typeof) has yet to be defined."))
-energy(ham::AbstractHamiltonian, args...) = throw(ArgumentError("Energy for $(ham |> typeof) types has yet to be defined."))
-DoF_energy(ham::AbstractHamiltonian, args...) = throw(ArgumentError("Energy for $(ham |> typeof) types has yet to be defined."))
-num_DoF(ham::AbstractHamiltonian, args...) = throw(ArgumentError("No number of DoFs has been defined for $(ham |> typeof) types."))
+DoF(::ham_t, location, args...) where ham_t <: AbstractHamiltonian = throw(ArgumentError("DoF for $ham_t at location $(location)::$(location |> typeof) has yet to be defined."))
+energy(::ham_t, args...) where ham_t <: AbstractHamiltonian = throw(ArgumentError("Energy for $ham_t types has yet to be defined."))
+DoF_energy(::ham_t, args...) where ham_t <: AbstractHamiltonian = throw(ArgumentError("Energy for $ham_t types has yet to be defined."))
+num_DoF(::ham_t, args...) where ham_t <: AbstractHamiltonian = throw(ArgumentError("No number of DoFs has been defined for $ham_t types."))
 
 """
     abstract type AbstractDoF end
@@ -38,8 +38,8 @@ The required interface for all DoF types is the following:
 """
 abstract type AbstractDoF end
 
-location(dof::AbstractDoF) = throw(ArgumentError("A location for $(dof |> typeof) has yet to be defined."))
-value(dof::AbstractDoF) = throw(ArgumentError("A value for $(dof |> typeof) has yet to be defined."))
+location(::dof_t) where dof_t <: AbstractDoF = throw(ArgumentError("A location for $dof_t has yet to be defined."))
+value(::dof_t) where dof_t <: AbstractDoF = throw(ArgumentError("A value for $dof_t has yet to be defined."))
 
 include("HamiltonianIterators.jl")
 

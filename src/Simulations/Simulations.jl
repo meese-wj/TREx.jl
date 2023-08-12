@@ -8,9 +8,9 @@ abstract type AbstractMCProcedure end
 struct Thermalization <: AbstractMCProcedure end
 struct MonteCarloSimulation <: AbstractMCProcedure end
 
-total_sweeps(procedure::AbstractMCProcedure, mcparams) = throw(ArgumentError("The total_sweeps for the $(typeof(procedure)) procedure have not been defined."))
-total_sweeps(procedure::Thermalization, mcparams) = thermalization_sweeps(mcparams)
-total_sweeps(procedure::MonteCarloSimulation, mcparams) = measurement_sweeps(mcparams)
+total_sweeps(::proc_t, mcparams) where proc_t <: AbstractMCProcedure = throw(ArgumentError("The total_sweeps for the $proc_t procedure have not been defined."))
+total_sweeps(::Thermalization, mcparams) = thermalization_sweeps(mcparams)
+total_sweeps(::MonteCarloSimulation, mcparams) = measurement_sweeps(mcparams)
 
 """
     monte_carlo!(models, algorithm, mcparams)

@@ -10,8 +10,8 @@ abstract type HamiltonianParameters <: AbstractTRExMCParameters end
 abstract type ModelParameters <: AbstractTRExMCParameters end
 abstract type SimulationParameters <: AbstractTRExMCParameters end
 
-thermalization_sweeps(p::SimulationParameters) = throw(ArgumentError("thermalization_sweeps have yet to be defined for $(p |> typeof) types."))
-measurement_sweeps(p::SimulationParameters) = throw(ArgumentError("measurement_sweeps have yet to be defined for $(p |> typeof) types."))
+thermalization_sweeps(::param_t) where param_t <: SimulationParameters = throw(ArgumentError("thermalization_sweeps have yet to be defined for $param_t types."))
+measurement_sweeps(::param_t) where param_t <: SimulationParameters = throw(ArgumentError("measurement_sweeps have yet to be defined for $param_t types."))
 
 @option struct MetropolisParameters <: SimulationParameters
     therm_sweeps::Int = Int(2^18)
