@@ -26,6 +26,7 @@ using TRExMC
         @test_throws ArgumentError Hamiltonians.value(FakeDoF())        
     end
 
+    include("test_HamiltonianIterators.jl")
     include("SpinHamiltonians/test_SpinHamiltonians.jl")
 
 end

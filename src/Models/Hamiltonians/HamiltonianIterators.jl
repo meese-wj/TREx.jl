@@ -15,7 +15,7 @@ DoF(itr::AbstractHamiltonianIterator, location) = DoF(itr |> hamiltonian, locati
 
 _iter_done(DoFstate::Tuple{<: AbstractHamiltonianIterator, Int}) = DoFstate[end] > num_DoF(DoFstate[begin] |> hamiltonian)
 
-Base.iterate(itr::AbstractHamiltonianIterator, args...) = throw(ArgumentError("No iteration technique has been defined for $(itr | typeof) types."))
+Base.iterate(::itr_t, args...) where itr_t <: AbstractHamiltonianIterator = throw(ArgumentError("No iteration technique has been defined for $itr_t types."))
 
 struct IterateByLocation{H <: AbstractHamiltonian} <: AbstractHamiltonianIterator
     ham::H
