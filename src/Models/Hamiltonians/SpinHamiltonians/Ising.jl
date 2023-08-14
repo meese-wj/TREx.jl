@@ -1,7 +1,8 @@
 
 using ..Parameters
 
-export num_DoF, location, value, BasicIsingHamiltonian
+export location, value, DoF, energy, DoF_energy, num_DoF,
+       BasicIsingHamiltonian, BasicIsingParameters
 
 
 abstract type AbstractIsingHamiltonian <: AbstractSpinHamiltonian end
@@ -27,4 +28,8 @@ struct BasicIsingHamiltonian{T <: AbstractFloat} <: AbstractIsingHamiltonian
     end
 end
 
+spins(ham::BasicIsingHamiltonian) = ham.spins
 num_DoF(ham::BasicIsingHamiltonian) = length(ham.spins)
+DoF(ham::BasicIsingHamiltonian, loc) = IsingDoF( loc, spins(ham)[loc] )
+# DoF(ham::BasicIsingHamiltonian, loc) = ( loc, spins(ham)[loc] )
+

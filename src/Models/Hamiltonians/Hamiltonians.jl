@@ -2,6 +2,7 @@ module Hamiltonians
 
 using Reexport
 using ..Parameters
+using ..Lattices
 
 export AbstractHamiltonian,
        AbstractDoF, location, value,

@@ -1,5 +1,5 @@
 import Base: size
-export size, CubicLattice2D, CubicLattice2DParams
+export size, num_sites, CubicLattice2D, CubicLattice2DParams
 
 abstract type AbstractCubicLattice <: AbstractLattice end
 parameters(latt::AbstractCubicLattice) = latt.params
