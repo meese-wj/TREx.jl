@@ -64,7 +64,24 @@ using BenchmarkTools
         end
 
         @testset "State" begin
+            params = Hamiltonians.BasicIsingParameters(1.0)
+            latt = Lattices.CubicLattice2D(4, 4)
+            ham = Hamiltonians.BasicIsing(latt, params)
             
+            @test_throws DimensionMismatch Hamiltonians.set_state!(ham, ones(4))
+            
+            Hamiltonians.set_state!(ham, ones(Hamiltonians.num_DoF(ham)))
+            @test Hamiltonians.magnetization(ham) == Hamiltonians.num_DoF(ham)
+            @test Hamiltonians.energy(ham, latt) == Hamiltonians.ground_state_energy(ham)
+            
+            Hamiltonians.set_state!(ham, -ones(Hamiltonians.num_DoF(ham)))
+            @test Hamiltonians.magnetization(ham) == -Hamiltonians.num_DoF(ham)
+            @test Hamiltonians.energy(ham, latt) == Hamiltonians.ground_state_energy(ham)
+
+            bm = @benchmark Hamiltonians.magnetization($ham)
+            @test bm.allocs == 0
+            bm = @benchmark Hamiltonians.energy($ham, $latt)
+            @test bm.allocs == 0
         end
 
     end
