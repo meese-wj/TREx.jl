@@ -16,12 +16,12 @@ using BenchmarkTools
         @test Hamiltonians.value(dof) == 1.0
     end
 
-    @testset "BasicIsingHamiltonian" begin
+    @testset "BasicIsing" begin
         
         @testset "Construction" begin
             params = Hamiltonians.BasicIsingParameters(1.0)
             latt = Lattices.CubicLattice2D(4, 4)
-            ham = Hamiltonians.BasicIsingHamiltonian(latt, params)
+            ham = Hamiltonians.BasicIsing(latt, params)
             
             @test Hamiltonians.num_DoF(ham) == Lattices.num_sites(latt)
             @test Hamiltonians.DoF(ham, 1) isa Hamiltonians.SpinHamiltonians.IsingDoF
@@ -33,7 +33,7 @@ using BenchmarkTools
         @testset "Iteration" begin
             params = Hamiltonians.BasicIsingParameters(1.0)
             latt = Lattices.CubicLattice2D(4, 4)
-            ham = Hamiltonians.BasicIsingHamiltonian(latt, params)
+            ham = Hamiltonians.BasicIsing(latt, params)
             
             bm = @benchmark iterate( Hamiltonians.IterateByLocation($ham) )
             @test bm.allocs == 0
