@@ -73,14 +73,26 @@ using BenchmarkTools
             Hamiltonians.set_state!(ham, ones(Hamiltonians.num_DoF(ham)))
             @test Hamiltonians.magnetization(ham) == Hamiltonians.num_DoF(ham)
             @test Hamiltonians.energy(ham, latt) == Hamiltonians.ground_state_energy(ham)
+            @test Hamiltonians.current_state(ham, 1) == Hamiltonians.SpinHamiltonians.IsingDoF(1, 1.0)
+            @test Hamiltonians.proposed_state(ham, 1) == Hamiltonians.SpinHamiltonians.IsingDoF(1, -1.0)
+            @test Hamiltonians.DoF_energy_change(ham, latt, 1) == Lattices.NN_SQUARE_LATT * params.Jex * 2
             
             Hamiltonians.set_state!(ham, -ones(Hamiltonians.num_DoF(ham)))
             @test Hamiltonians.magnetization(ham) == -Hamiltonians.num_DoF(ham)
             @test Hamiltonians.energy(ham, latt) == Hamiltonians.ground_state_energy(ham)
+            @test Hamiltonians.current_state(ham, 1) == Hamiltonians.SpinHamiltonians.IsingDoF(1, -1.0)
+            @test Hamiltonians.proposed_state(ham, 1) == Hamiltonians.SpinHamiltonians.IsingDoF(1, 1.0)
+            @test Hamiltonians.DoF_energy_change(ham, latt, 1) == Lattices.NN_SQUARE_LATT * params.Jex * 2
 
             bm = @benchmark Hamiltonians.magnetization($ham)
             @test bm.allocs == 0
             bm = @benchmark Hamiltonians.energy($ham, $latt)
+            @test bm.allocs == 0
+            bm = @benchmark Hamiltonians.current_state($ham, 1)
+            @test bm.allocs == 0
+            bm = @benchmark Hamiltonians.proposed_state($ham, 1)
+            @test bm.allocs == 0
+            bm = @benchmark Hamiltonians.DoF_energy_change($ham, $latt, 1)
             @test bm.allocs == 0
         end
 

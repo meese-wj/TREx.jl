@@ -57,9 +57,11 @@ function DoF_energy(ham::BasicIsing, latt, dof)
     return -ham.params.Jex * val * eff_field
 end
 
-function DoF_energy_change(ham::BasicIsing, latt, olddof, newdof)
+function DoF_energy_change(ham::BasicIsing, latt, olddof::IsingDoF, newdof::IsingDoF)
     return DoF_energy(ham, latt, newdof) - DoF_energy(ham, latt, olddof)
 end
+
+DoF_energy_change(ham::BasicIsing, latt, loc) = DoF_energy_change(ham, latt, current_state(ham, loc), proposed_state(ham, loc))
 
 function energy(ham::BasicIsing{T}, latt) where T
     en::T = zero(T)
