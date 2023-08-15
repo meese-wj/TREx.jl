@@ -5,4 +5,5 @@ using TRExMC
 @testset "Models.jl" begin
     include("Lattices/test_Lattices.jl")
     include("Hamiltonians/test_Hamiltonians.jl")
+    include("Observables/test_Observables.jl")
 end
