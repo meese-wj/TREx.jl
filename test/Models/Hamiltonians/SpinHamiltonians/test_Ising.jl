@@ -35,10 +35,32 @@ using BenchmarkTools
             latt = Lattices.CubicLattice2D(4, 4)
             ham = Hamiltonians.BasicIsing(latt, params)
             
-            bm = @benchmark iterate( Hamiltonians.IterateByLocation($ham) )
-            @test bm.allocs == 0
-            bm = @benchmark iterate( Hamiltonians.IterateAtRandom($ham) )
-            @test bm.allocs == 0
+            @testset "ByLocation" begin
+                locs = []
+                for dof ∈ Hamiltonians.IterateByLocation(ham)
+                    push!(locs, Hamiltonians.location(dof))
+                end
+                @test all( locs .== range(1, Lattices.num_sites(latt)) )
+            end
+            
+            @testset "AtRandom" begin
+                locs = []
+                iters = []
+                for (iter, dof) ∈ enumerate(Hamiltonians.IterateAtRandom(ham))
+                    push!(locs, Hamiltonians.location(dof))
+                    push!(iters, iter)
+                end
+                @test 1 ≤ minimum( unique(locs) )
+                @test Hamiltonians.num_sites(latt) ≥ maximum( unique(locs) )
+                @test all( iters .== range(1, Lattices.num_sites(latt)) )
+            end
+
+            @testset "Allocations" begin
+                bm = @benchmark iterate( Hamiltonians.IterateByLocation($ham) )
+                @test bm.allocs == 0
+                bm = @benchmark iterate( Hamiltonians.IterateAtRandom($ham) )
+                @test bm.allocs == 0
+            end
         end
 
         @testset "State" begin

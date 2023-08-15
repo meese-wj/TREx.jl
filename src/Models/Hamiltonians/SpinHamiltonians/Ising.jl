@@ -31,5 +31,4 @@ end
 spins(ham::BasicIsing) = ham.spins
 num_DoF(ham::BasicIsing) = length(ham.spins)
 DoF(ham::BasicIsing, loc) = IsingDoF( loc, spins(ham)[loc] )
-# DoF(ham::BasicIsing, loc) = ( loc, spins(ham)[loc] )
 
