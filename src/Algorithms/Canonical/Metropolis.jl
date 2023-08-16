@@ -18,3 +18,5 @@ function metropolis_sweep!(model, mcparams)
     end
     return model
 end
+
+@algorithm true Metropolis! metropolis_sweep!
