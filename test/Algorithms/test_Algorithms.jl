@@ -43,11 +43,11 @@ using TRExMC
         @testset "_struct_setup" begin
             name = :TonyStark
             ex1 = Algorithms._struct_setup(name)
-            @test ex1 == :( struct $name <: Algorithms.AbstractAlgorithm end )
+            @test ex1 == ( :( struct $name <: Algorithms.AbstractAlgorithm end ) |> Base.remove_linenums! )
             
             name = "TonyStark"
             ex2 = Algorithms._struct_setup(name)
-            @test ex2 == :( struct $(name |> Symbol) <: Algorithms.AbstractAlgorithm end )
+            @test ex2 == ( :( struct $(name |> Symbol) <: Algorithms.AbstractAlgorithm end ) |> Base.remove_linenums! ) 
             @test ex1 == ex2
         end
 
