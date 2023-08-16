@@ -35,31 +35,42 @@ end
 # end
 
 function _define_procedure(export_alg, name, fxns...)
+    name = Symbol(name)
     expr = Expr(:block)
     expr.args = [:( import .Algorithms: procedure )]
-    push!(expr.args, :( procedure(::$(Symbol(name))) = Algorithms._algorithm_setup($export_alg, $name, $(fxns...)) |> Base.remove_linenums! ) )
+    push!(expr.args, :( procedure(::$name) = Algorithms._algorithm_setup($export_alg, $name, $(fxns...)) |> Base.remove_linenums! ) )
     if export_alg
         push!(expr.args, :(export procedure))
     end
     return expr |> Base.remove_linenums!
 end
 
-function _algorithm_setup(export_alg, name, fxns...)    
-    name = Symbol(name)
-    str_expr = :( struct $name <: Algorithms.AbstractAlgorithm end )
-    body_expr = Expr(:block)
-    body_expr.args = [ :( Algorithms._check_func($name, $idx, $func); $func(m, args...) ) for (idx, func) ∈ enumerate(fxns) ]
+_struct_setup(name) = (name = Symbol(name); :( struct $name <: Algorithms.AbstractAlgorithm end )) |> Base.remove_linenums!
 
-    func_expr = :(
+function _body_setup(name, fxns...)
+    name = Symbol(name)
+    body_expr = Expr(:block)
+    for (idx, func) ∈ enumerate(fxns)
+        push!( body_expr.args, :( Algorithms._check_func($name, $idx, $func); $func(m, args...) ).args... )
+    end
+    return body_expr |> Base.remove_linenums!
+end
+
+function _constructor_overload(name, fxns...)
+    name = Symbol(name)
+    return quote
         function $name(m::AbstractModel, args...)
-            $body_expr
+            $(_body_setup(name, fxns...))
             return m
         end
-    )
-    
+    end |> Base.remove_linenums!
+end
+
+function _algorithm_setup(export_alg, name, fxns...)    
+    name = Symbol(name)
     expr = quote
-        $str_expr
-        $func_expr
+        $(_struct_setup(name))
+        $(_constructor_overload(name, fxns...))
     end
     if export_alg
         push!(expr.args, :(export $name))
