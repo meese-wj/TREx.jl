@@ -16,7 +16,9 @@ using .Observables
 import .Observables: measure!
 export Observables
 
-export Model, lattice, hamiltonian, observables, measure!
+export AbstractModel, Model, lattice, hamiltonian, observables, measure!
+
+abstract type AbstractModel end
 
 """
     Model{L, H[, O]}
@@ -28,7 +30,7 @@ The main container used for simulations. The type parameters are given by
 * `O <: `[`AbstractObservable`](@ref)
     * If no observable is provided, then the [`NullObservable`](@ref) is used.
 """
-struct Model{L <: AbstractLattice, H <: AbstractHamiltonian, O <: AbstractObservables}
+struct Model{L <: AbstractLattice, H <: AbstractHamiltonian, O <: AbstractObservables} <: AbstractModel
     latt::L
     ham::H
     obs::O

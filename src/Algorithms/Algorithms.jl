@@ -1,9 +1,9 @@
 module Algorithms
 
 using ..TRExMC
-import ..TRExMC: Model # import and export this just to make the name available
+import ..TRExMC: AbstractModel # import and export this just to make the name available
 
-export Model, procedure, @algorithm
+export AbstractModel, procedure, @algorithm
 
 abstract type AbstractAlgorithm end
 procedure(::alg_t, args...) where alg_t <: AbstractAlgorithm = throw(ArgumentError("No procedure has been defined for $alg_t types.")) 
@@ -51,7 +51,7 @@ function _algorithm_setup(export_alg, name, fxns...)
     body_expr.args = [ :( Algorithms._check_func($name, $idx, $func); $func(m, args...) ) for (idx, func) ∈ enumerate(fxns) ]
 
     func_expr = :(
-        function $name(m, args...)
+        function $name(m::AbstractModel, args...)
             $body_expr
             return m
         end
