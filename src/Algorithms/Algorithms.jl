@@ -60,7 +60,7 @@ function _constructor_overload(name, fxns...)
     name = Symbol(name)
     return quote
         function $name(m::AbstractModel, args...)
-            $(_body_setup(name, fxns...))
+            $(_body_setup(name, fxns...).args...)
             return m
         end
     end |> Base.remove_linenums!
@@ -70,7 +70,7 @@ function _algorithm_setup(export_alg, name, fxns...)
     name = Symbol(name)
     expr = quote
         $(_struct_setup(name))
-        $(_constructor_overload(name, fxns...))
+        $(_constructor_overload(name, fxns...).args...)
     end
     if export_alg
         push!(expr.args, :(export $name))

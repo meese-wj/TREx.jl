@@ -72,7 +72,7 @@ using TRExMC
             ex1 = Algorithms._constructor_overload(name, fxns...)
             actual = quote
                 function $name_S(m::AbstractModel, args...)
-                    $(Algorithms._body_setup(name, fxns...))
+                    $(Algorithms._body_setup(name, fxns...).args...)
                     return m
                 end
             end |> Base.remove_linenums!
@@ -92,7 +92,7 @@ using TRExMC
             ex2 = Algorithms._algorithm_setup(false, name_S, fxns...)
             actual = quote
                 $(Algorithms._struct_setup(name))
-                $(Algorithms._constructor_overload(name, fxns...))
+                $(Algorithms._constructor_overload(name, fxns...).args...)
             end |> Base.remove_linenums! 
             @test ex1 == actual
             @test ex2 == actual

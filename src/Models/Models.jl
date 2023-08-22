@@ -13,8 +13,8 @@ export Hamiltonians
 
 include("Observables/Observables.jl")
 using .Observables
-import .Observables: measure!
-export Observables
+import .Observables: measure!, @observables
+export Observables, @observables
 
 export AbstractModel, Model, lattice, hamiltonian, observables, measure!
 
