@@ -56,7 +56,7 @@ end
 
 function _build_struct(name, symbols)
     expr = quote
-        mutable struct $name{T <: Number} <: AbstractObservables
+        mutable struct $name{T <: Number} <: Observables.AbstractObservables
             step::Int
             $( _build_structfields(symbols).args... )
         end
@@ -81,6 +81,11 @@ function _check_functions(symbols, funcs)
     return nothing 
 end
 
+function _check_observables(symbols, funcs)
+    @assert length(symbols) == length(funcs) "The number of observables fields must be equal to the number of methods. Got $(length(symbols)) and $(length(funcs)), respectively."
+    _check_functions(symbols, funcs)
+end
+
 function _build_measurement_loop(symbols, funcs)
     expr = Expr(:block)
     for (symb, func) ∈ zip(symbols, funcs)
@@ -100,7 +105,7 @@ function _build_measurements(name, symbols, funcs)
 end
 
 function _observables(name, symbols, funcs)
-    @assert length(symbols) == length(funcs) "The number of observables fields must be equal to the number of methods. Got $(length(symbols)) and $(length(funcs)), respectively."
+    _check_observables(symbols, funcs)
     name = Symbol(name)
     symbols = Symbol.(symbols)
     _check_functions(symbols, funcs)
