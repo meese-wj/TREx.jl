@@ -1,6 +1,6 @@
 module Observables
 
-export AbstractObservables, measure!, @observables
+export AbstractObservables, measure!, @observables, procedure
 
 """
     abstract type AbstractObservables end
@@ -40,10 +40,10 @@ argument.
     `length(symbols) == length(funcs)` by construction.
 """
 macro observables(name, symbols, funcs)
-    _observables(name, symbols, funcs) |> esc
+    esc(_observables(name, eval(symbols), eval(funcs)))
 end
-macro observables(name, symbol_funcs::AbstractDict)
-    _observables(name, symbol_funcs) |> esc
+macro observables(name, symbol_funcs)
+    esc(_observables(name, eval(symbol_funcs)))
 end
 
 function _build_structfields(symbols)
@@ -94,6 +94,7 @@ function _build_measurement_loop(symbols, funcs)
     return expr |> Base.remove_linenums!
 end
 
+# TODO: Add a catch if the step exceeds the vector size?
 function _build_measurements(name, symbols, funcs)
     expr = quote
         function measure!(obs::$name, ham, latt)
