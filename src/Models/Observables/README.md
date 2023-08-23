@@ -59,5 +59,4 @@ So, we see that both cases, up to their actual meaning, are identical setups. Th
 
 @observables AntiferromagneticObservables Dict( :energy => energy, :energy2 => energy2, :stagmag => staggered_magnetization, :mag2 => magnetization2 )
 ```
-
-Thus, instead of needing to develop many essentially identical structures and methods each time, we provide a simple scriptable interface to generalize ideas and try new things. This of course has the added benefit of unifying the procedures for all the observables used by `TRExMC`.
+One can always see the actual julia code written by the `@observables` macro whenever they wish using the `@macroexpand` helper macro. Thus, instead of needing to develop many essentially identical structures and methods each time, we provide a simple scriptable interface to generalize ideas and try new things. This of course has the added benefit of unifying the procedures for all the observables used by `TRExMC`.
