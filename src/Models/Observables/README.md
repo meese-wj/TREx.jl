@@ -45,7 +45,7 @@ function measure!(obs::AntiferromagneticObservables, ham, latt)
     obs.energy[obs.step] = energy(ham, latt)
     obs.energy2[obs.step] = energy2(ham, latt)
     obs.stagmag[obs.step] = staggered_magnetization(ham, latt)
-    obs.stagmag2[obs.step] = staggered_magnetization2(ham, latt)^2
+    obs.stagmag2[obs.step] = staggered_magnetization2(ham, latt)
     obs.step += 1
 end
 ```
