@@ -83,7 +83,7 @@ end
 
 function _check_observables(symbols, funcs)
     @assert length(symbols) == length(funcs) "The number of observables fields must be equal to the number of methods. Got $(length(symbols)) and $(length(funcs)), respectively."
-    _check_functions(symbols, funcs)
+    return _check_functions(symbols, funcs)
 end
 
 function _build_measurement_loop(symbols, funcs)

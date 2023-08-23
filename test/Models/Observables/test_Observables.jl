@@ -31,6 +31,10 @@ using TRExMC
             # check non function arguments with a dictionary
             @test_throws AssertionError Observables._observables("Blah", Dict(:A => 1, :B => zero))
             @test_throws AssertionError Observables._observables(:Blah, Dict(:A => zero, :B => zero, :C => "zero"))
+
+            # checks pass
+            @test Observables._check_functions([:A], [zero]) isa Nothing
+            @test Observables._check_functions([:A, :B, :C], [zero, oneunit, sqrt]) isa Nothing
         end
 
         @testset "_build_struct" begin
@@ -76,12 +80,12 @@ using TRExMC
         end
 
         @testset "_build_measurements" begin
+            symbs1 = [:A]
+            funcs1 = [zero]
+            symbs3 = [:A, :B, :C]
+            funcs3 = [zero, oneunit, zero]
             
             @testset "_build_measurement_loop" begin
-                symbs1 = [:A]
-                funcs1 = [zero]
-                symbs3 = [:A, :B, :C]
-                funcs3 = [zero, oneunit, zero]
                 ex1 = Observables._build_measurement_loop(symbs1, funcs1)    
                 ex3 = Observables._build_measurement_loop(symbs3, funcs3)    
                 actual1 = quote
@@ -97,10 +101,64 @@ using TRExMC
                 @test ex1 != actual3
             end
 
+            ex1 = Observables._build_measurements(:Blah, symbs1, funcs1)
+            ex3 = Observables._build_measurements(:Blah, symbs3, funcs3)
 
-
+            actual1 = quote
+                function measure!(obs::Blah, ham, latt)
+                    $( Observables._build_measurement_loop(symbs1, funcs1).args... )
+                    obs.step += oneunit(obs.step)
+                end
+            end |> Base.remove_linenums!
+            actual3 = quote
+                function measure!(obs::Blah, ham, latt)
+                    $( Observables._build_measurement_loop(symbs3, funcs3).args... )
+                    obs.step += oneunit(obs.step)
+                end
+            end |> Base.remove_linenums!
+            @test ex1 == actual1
+            @test ex3 == actual3
+            @test ex1 != actual3
         end
 
+        @testset "_observables" begin
+            symbs1 = [:A]
+            funcs1 = [zero]
+            symbs3 = [:A, :B, :C]
+            funcs3 = [zero, oneunit, zero]
+
+            ex1 = Observables._observables(:Blah, symbs1, funcs1)
+            ex12 = Observables._observables("Blah", symbs1, funcs1)
+            ex13 = Observables._observables("Blah", Dict(zip(symbs1, funcs1)))
+            @test ex1 == ex12
+            @test ex1 == ex13
+            actual1 = quote
+                import .Observables: measure!
+                $(Observables._build_struct(:Blah, symbs1).args...)
+                $(Observables._build_constructor(:Blah, symbs1).args...)
+                $(Observables._build_measurements(:Blah, symbs1, funcs1).args...)
+                export measure!, Blah
+            end |> Base.remove_linenums!
+            @test ex1 == actual1
+            @test ex12 == actual1
+            @test ex13 == actual1
+            
+            ex3 = Observables._observables(:Blah, symbs3, funcs3)
+            ex32 = Observables._observables("Blah", symbs3, funcs3)
+            ex33 = Observables._observables("Blah", Dict(zip(symbs3, funcs3)))
+            @test ex3 == ex32
+            @test ex3 == ex33
+            actual3 = quote
+                import .Observables: measure!
+                $(Observables._build_struct(:Blah, symbs3).args...)
+                $(Observables._build_constructor(:Blah, symbs3).args...)
+                $(Observables._build_measurements(:Blah, symbs3, funcs3).args...)
+                export measure!, Blah
+            end |> Base.remove_linenums!
+            @test ex3 == actual3
+            @test ex32 == actual3
+            @test ex33 == actual3
+        end
 
     end
 
