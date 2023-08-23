@@ -50,9 +50,9 @@ function measure!(obs::AntiferromagneticObservables, ham, latt)
 end
 ```
 
-## The Solution: the `@observable` macro
+## The Solution: the `@observables` macro
 
-So, we see that both cases, up to their actual meaning, are identical setups. Thus, our `@observable` macro automates this process as
+So, we see that both cases, up to their actual meaning, are identical setups. Thus, our `@observables` macro automates this process as
 
 ```julia
 @observables FerromagneticObservables Dict( :energy => energy, :energy2 => energy2, :mag => magnetization, :mag2 => magnetization2 )
