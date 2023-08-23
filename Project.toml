@@ -1,7 +1,7 @@
 name = "TRExMC"
 uuid = "4c1474f5-d57d-4103-b4cd-bd216d071502"
 authors = ["W. Joe Meese <meese022@umn.edu> and contributors"]
-version = "0.0.3"
+version = "0.0.4"
 
 [deps]
 Configurations = "5218b696-f38b-4ac9-8b61-a12ec717816d"
