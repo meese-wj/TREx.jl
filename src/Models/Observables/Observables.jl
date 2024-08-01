@@ -40,10 +40,11 @@ argument.
     `length(symbols) == length(funcs)` by construction.
 """
 macro observables(name, symbols, funcs)
-    esc(_observables(name, eval(symbols), eval(funcs)))
+    # TODO: For some reason, Main.energy needs to be passed for energy?
+    _observables(name, symbols, funcs)
 end
 macro observables(name, symbol_funcs)
-    esc(_observables(name, eval(symbol_funcs)))
+    _observables(name, symbol_funcs)
 end
 
 function _build_structfields(symbols)
@@ -126,5 +127,11 @@ end
 Return an `Expr`ession used by the [`@observables`](@ref) macro.
 """
 _observables(name, symbol_funcs::AbstractDict) = _observables(name, keys(symbol_funcs), values(symbol_funcs))
+function _observables(name, symbols::Expr, funcs::Expr)
+    symbs = :( $(esc(symbols)) ) 
+    fxns = :( $(esc(funcs)) ) 
+    return _observables(name, eval(symbs), eval(fxns))
+end
+_observables(name, symbol_funcs::Expr) = _observables(name, eval(esc(symbol_funcs)))
 
 end # Observables
