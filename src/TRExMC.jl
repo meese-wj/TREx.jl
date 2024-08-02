@@ -1,3 +1,6 @@
+"""
+# `TRExMC`: Thermodynamics via Replica-Exchange Monte Carlo
+"""
 module TRExMC
 
 # Use this to reexport the namespaces from each submodule

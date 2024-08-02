@@ -10,5 +10,5 @@ Documentation for [TRExMC](https://github.com/meese-wj/TRExMC.jl).
 ```
 
 ```@autodocs
-Modules = [TRExMC]
+Modules = [TRExMC, Parameters, Models, Lattices, Hamiltonians, Observables, Algorithms, Simulations]
 ```
