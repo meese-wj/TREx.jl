@@ -27,6 +27,10 @@ hamiltonian(m::AbstractModel) = throw(MethodError(hamiltonian, m))
 observables(m::AbstractModel) = throw(MethodError(observables, m))
 measure!(m::AbstractModel) = throw(MethodError(measure!, m))
 
+# TODO: Maybe just make this structure Abstract? 
+#       Just assume that all model subtypes will have
+#       this struct layout? Easier to dispatch iteration
+#       schemes then...
 """
     Model{L, H[, O]}
 

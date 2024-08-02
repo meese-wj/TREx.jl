@@ -8,7 +8,7 @@ export iterate_DoFs, energy, current_state, proposed_state, DoF_energy_change, s
 Wrapper to extract the `Hamiltonian` from the `Model` and 
 iterate.
 """
-iterate_DoFs(m::AbstractModel) = DefaultIterator(hamiltonian(m))
+iterate_DoFs(m::AbstractModel) = DefaultIterator(rng(m), hamiltonian(m))
 
 # TODO: Probably just scriptify these
 Hamiltonians.energy(m::AbstractModel, args...) = Hamiltonians.energy(hamiltonian(m), lattice(m), args...)
