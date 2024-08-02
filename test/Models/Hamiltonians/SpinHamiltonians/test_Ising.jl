@@ -25,9 +25,9 @@ using BenchmarkTools
             
             @test Hamiltonians.num_DoF(ham) == Lattices.num_sites(latt)
             @test Hamiltonians.DoF(ham, 1) isa Hamiltonians.SpinHamiltonians.IsingDoF
-            @test Hamiltonians.DoF(ham, 1) |> Hamiltonians.location isa Int
-            @test Hamiltonians.DoF(ham, 1) |> Hamiltonians.location == 1
-            @test Hamiltonians.DoF(ham, 1) |> Hamiltonians.value isa typeof(params.Jex)
+            @test Hamiltonians.DoF(ham, 1) |> Hamiltonians.DoF_location isa Int
+            @test Hamiltonians.DoF(ham, 1) |> Hamiltonians.DoF_location == 1
+            @test Hamiltonians.DoF(ham, 1) |> Hamiltonians.DoF_value isa typeof(params.Jex)
         end
         
         @testset "Iteration" begin
