@@ -24,6 +24,6 @@ makedocs(;
 )
 
 deploydocs(;
-    repo = Documenter.Remotes.repourl(repo),
+    repo = "github.com/$(repo.user)/$(repo.repo)",
     devbranch="main",
 )
