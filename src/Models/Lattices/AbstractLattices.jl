@@ -40,9 +40,9 @@ Return the number of sites that an [`AbstractLattice`](@ref) contains.
 # Example
 
 ```jldoctest
-julia> latt = CubicLattice2D(4, 4);
+julia> latt = Lattices.CubicLattice2D(4, 4);
 
-julia> num_sites(latt)
+julia> Lattices.num_sites(latt)
 16
 ```
 """
@@ -55,10 +55,10 @@ Calculate the flattened index from an iterable set of `indices` in an [`Abstract
 # Example
 
 ```jldoctest
-julia> latt = CubicLattice2D(4, 4);
+julia> latt = Lattices.CubicLattice2D(4, 4);
 
-julia> site_index(latt, (1, 2))
-6
+julia> Lattices.site_index(latt, (1, 2))
+5
 ```
 """
 site_index( latt::AbstractLattice, indices ) = throw(MethodError(site_index, latt, indices))
@@ -70,9 +70,9 @@ Return the set of `nearest_neighbors` for a given `site` in the [`AbstractLattic
 # Example
 
 ```jldoctest
-julia> latt = CubicLattice2D(4, 4);
+julia> latt = Lattices.CubicLattice2D(4, 4);
 
-julia> nearest_neighbors(latt, 1)
+julia> Lattices.nearest_neighbors(latt, 1)
 4-element view(::Matrix{Int32}, 1, :) with eltype Int32:
  13
   4
@@ -89,10 +89,10 @@ Return the `parameters` used to define the [`AbstractLattice`](@ref).
 # Example
 
 ```jldoctest
-julia> latt = CubicLattice2D(4, 4);
+julia> latt = Lattices.CubicLattice2D(4, 4);
 
-julia> parameters(latt, 1)
-CubicLattice2DParams(4, 4)
+julia> Lattices.parameters(latt)
+TRExMC.Models.Lattices.CubicLattice2DParams(4, 4)
 ```
 """
 parameters(latt::AbstractLattice) = throw(MethodError(parameters, latt))

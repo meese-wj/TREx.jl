@@ -69,3 +69,5 @@ end
 CubicLattice2D(Lx::Int, Ly::Int) = CubicLattice2D( CubicLattice2DParams(Lx, Ly) )
 
 nearest_neighbors(latt::CubicLattice2D, site) = view(latt.neighbors, site, :)
+
+parameters(latt::CubicLattice2D) = latt.params
