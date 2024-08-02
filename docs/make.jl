@@ -3,10 +3,13 @@ using Documenter
 
 DocMeta.setdocmeta!(TRExMC, :DocTestSetup, :(using TRExMC); recursive=true)
 
+repo = Documenter.Remotes.GitHub("meese-wj", "TRExMC.jl")
+
 makedocs(;
     modules=[TRExMC],
     authors="W. Joe Meese <meese022@umn.edu> and contributors",
-    repo="https://github.com/meese-wj/TRExMC.jl/blob/{commit}{path}#{line}",
+    repo = repo,
+    # repo="https://github.com/meese-wj/TRExMC.jl/blob/{commit}{path}#{line}",
     sitename="TRExMC.jl",
     format=Documenter.HTML(;
         prettyurls=get(ENV, "CI", "false") == "true",
@@ -21,6 +24,6 @@ makedocs(;
 )
 
 deploydocs(;
-    repo="github.com/meese-wj/TRExMC.jl",
+    repo = Documenter.Remotes.repourl(repo),
     devbranch="main",
 )
