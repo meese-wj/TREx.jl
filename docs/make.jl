@@ -17,6 +17,7 @@ makedocs(;
     pages=[
         "Home" => "index.md",
     ],
+    strict = Documenter.except(:missing_docs),
 )
 
 deploydocs(;
