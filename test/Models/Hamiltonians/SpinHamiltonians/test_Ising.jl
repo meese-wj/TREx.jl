@@ -12,8 +12,8 @@ using BenchmarkTools
     
     @testset "IsingDoF" begin
         dof = Hamiltonians.SpinHamiltonians.IsingDoF(1, 1.0)
-        @test Hamiltonians.location(dof) == 1
-        @test Hamiltonians.value(dof) == 1.0
+        @test Hamiltonians.DoF_location(dof) == 1
+        @test Hamiltonians.DoF_value(dof) == 1.0
     end
 
     @testset "BasicIsing" begin
@@ -38,7 +38,7 @@ using BenchmarkTools
             @testset "ByLocation" begin
                 locs = []
                 for dof ∈ Hamiltonians.IterateByLocation(ham)
-                    push!(locs, Hamiltonians.location(dof))
+                    push!(locs, Hamiltonians.DoF_location(dof))
                 end
                 @test all( locs .== range(1, Lattices.num_sites(latt)) )
             end
@@ -47,7 +47,7 @@ using BenchmarkTools
                 locs = []
                 iters = []
                 for (iter, dof) ∈ enumerate(Hamiltonians.IterateAtRandom(ham))
-                    push!(locs, Hamiltonians.location(dof))
+                    push!(locs, Hamiltonians.DoF_location(dof))
                     push!(iters, iter)
                 end
                 @test 1 ≤ minimum( unique(locs) )

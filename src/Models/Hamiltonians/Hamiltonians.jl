@@ -5,7 +5,7 @@ using ..Parameters
 using ..Lattices
 
 export AbstractHamiltonian,
-       AbstractDoF, location, value,
+       AbstractDoF, DoF_location, DoF_value,
        DoF, energy, DoF_energy, num_DoF
 
 """
@@ -34,13 +34,13 @@ Parent type for all _degrees of freedom_ used in the simulations.
 
 The required interface for all DoF types is the following:
 
-* `location`: Defines the in-memory identification for where the DoF is.
-* `value`: Defines what the value of the DoF is (its current state).
+* `DoF_location`: Defines the in-memory identification for where the DoF is.
+* `DoF_value`: Defines what the value of the DoF is (its current state).
 """
 abstract type AbstractDoF end
 
-location(::dof_t) where dof_t <: AbstractDoF = throw(ArgumentError("A location for $dof_t has yet to be defined."))
-value(::dof_t) where dof_t <: AbstractDoF = throw(ArgumentError("A value for $dof_t has yet to be defined."))
+DoF_location(::dof_t) where dof_t <: AbstractDoF = throw(ArgumentError("A location for $dof_t has yet to be defined."))
+DoF_value(::dof_t) where dof_t <: AbstractDoF = throw(ArgumentError("A value for $dof_t has yet to be defined."))
 
 include("HamiltonianIterators.jl")
 

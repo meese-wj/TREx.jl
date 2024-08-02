@@ -5,7 +5,7 @@ using ..Hamiltonians
 using ..Lattices
 
 # Pull in methods to overload in this module
-import ..Hamiltonians: location, value, DoF, energy, DoF_energy, num_DoF
+import ..Hamiltonians: DoF_location, DoF_value, DoF, energy, DoF_energy, num_DoF
 
 abstract type AbstractSpinHamiltonian <: AbstractHamiltonian end
 

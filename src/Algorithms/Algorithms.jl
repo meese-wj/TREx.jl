@@ -2,6 +2,7 @@ module Algorithms
 
 using ..TRExMC
 import ..TRExMC: AbstractModel # import and export this just to make the name available
+import .Models
 
 export AbstractModel, procedure, @algorithm
 

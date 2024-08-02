@@ -12,8 +12,8 @@ struct IsingDoF{I <: Integer, T <: AbstractFloat} <: AbstractDoF
     site::I
     spin::T
 end
-location(dof::IsingDoF) = dof.site
-value(dof::IsingDoF) = dof.spin
+DoF_location(dof::IsingDoF) = dof.site
+DoF_value(dof::IsingDoF) = dof.spin
 
 struct BasicIsingParameters{T <: AbstractFloat} <: Parameters.HamiltonianParameters
     Jex::T  # Ising exchanges. Jex > 0 is ferromagnetic
@@ -34,25 +34,30 @@ num_DoF(ham::BasicIsing) = length(ham.spins)
 DoF(ham::BasicIsing, loc) = IsingDoF( loc, spins(ham)[loc] )
 
 current_state(ham::BasicIsing, loc) = DoF(ham, loc)
-proposed_state(ham::BasicIsing, loc) = (dof = DoF(ham, loc); IsingDoF(location(dof), -value(dof)))
+function proposed_state(ham::BasicIsing, loc) 
+    dof = DoF(ham, loc)
+    IsingDoF(DoF_location(dof), -DoF_value(dof))
+end
 
-set_state!(ham::BasicIsing, dof::IsingDoF) = ham.spins[location(dof)] = value(dof)
+function set_state!(ham::BasicIsing, dof::IsingDoF)
+    ham.spins[DoF_location(dof)] = DoF_value(dof)
+end
 
 function set_state!(ham::BasicIsing, spins)
     length(spins) == num_DoF(ham) ? nothing : throw(DimensionMismatch("The number of provided spins ($(length(spins))) does not match the number of degrees of freedom ($(num_DoF(ham)))."))
     for dof ∈ IterateByLocation(ham)
-        loc = location(dof)
+        loc = DoF_location(dof)
         set_state!(ham, IsingDoF(loc, spins[loc]))
     end
     return ham
 end
 
 function DoF_energy(ham::BasicIsing, latt, dof)
-    loc = location(dof)
-    val = value(dof)
+    loc = DoF_location(dof)
+    val = DoF_value(dof)
     eff_field::typeof(val) = zero(val)
     for nn ∈ nearest_neighbors(latt, loc)
-        eff_field += DoF(ham, nn) |> value
+        eff_field += DoF(ham, nn) |> DoF_value
     end
     return -ham.params.Jex * val * eff_field
 end
@@ -61,7 +66,9 @@ function DoF_energy_change(ham::BasicIsing, latt, olddof::IsingDoF, newdof::Isin
     return DoF_energy(ham, latt, newdof) - DoF_energy(ham, latt, olddof)
 end
 
-DoF_energy_change(ham::BasicIsing, latt, loc) = DoF_energy_change(ham, latt, current_state(ham, loc), proposed_state(ham, loc))
+function DoF_energy_change(ham::BasicIsing, latt, loc)
+    DoF_energy_change(ham, latt, current_state(ham, loc), proposed_state(ham, loc))
+end
 
 function energy(ham::BasicIsing{T}, latt) where T
     en::T = zero(T)

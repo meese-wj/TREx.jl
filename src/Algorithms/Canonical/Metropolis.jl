@@ -1,20 +1,21 @@
 
+using Random
 export metropolis_sweep!
 
-function metropolis_move!(model, dof_site, dof_value, mcparams)
-    old_state = current_state(model, dof_site, dof_value)
-    new_state = proposed_move(model, dof_site, dof_value)
-    ΔE = energy_change(model, new_state, old_state)
-    if ΔE < zero(ΔE) || rng(model) < @fastmath exp( -ΔE / temperature(mcparams) )
-        set_state!(model, dof_site, new_state)
+function metropolis_move!(model, dof_site, temperature)
+    old_state = Models.current_state(model, dof_site)
+    new_state = Models.proposed_state(model, dof_site)
+    ΔE = Models.DoF_energy_change(model, old_state, new_state)
+    if ΔE < zero(ΔE) || rand(Models.rng(model)) < @fastmath exp( -ΔE / temperature )
+        Models.set_state!(model, new_state)
     end
     return model
 end
 
 
-function metropolis_sweep!(model, mcparams)
-    for dof ∈ iterate_dofs(model)
-        metropolis_move!(model, location(dof), value(dof), mcparams)
+function metropolis_sweep!(model, current_temperature)
+    for dof ∈ Models.iterate_DoFs(model)
+        metropolis_move!(model, Models.DoF_location(dof), current_temperature)
     end
     return model
 end

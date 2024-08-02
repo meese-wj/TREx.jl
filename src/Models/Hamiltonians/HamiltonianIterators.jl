@@ -2,7 +2,7 @@
 using Base
 using Random
 
-export iterate, hamiltonian, IterateByLocation, IterateAtRandom
+export iterate, hamiltonian, IterateByLocation, IterateAtRandom, DefaultIterator
 
 """
     abstract type AbstractHamiltonianIterator end
@@ -25,6 +25,8 @@ struct IterateAtRandom{RNG <: AbstractRNG, H <: AbstractHamiltonian} <: Abstract
 end
 
 IterateAtRandom(ham) = IterateAtRandom(Random.GLOBAL_RNG, ham)
+
+DefaultIterator(args...) = IterateAtRandom(args...)
 
 _random_location(itr) = rand(itr.rng, 1:num_DoF(itr))
 

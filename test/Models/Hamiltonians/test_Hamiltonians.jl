@@ -22,8 +22,8 @@ using TRExMC
 
     @testset "Testing AbstractDoF" begin
         struct FakeDoF <: Hamiltonians.AbstractDoF end
-        @test_throws ArgumentError Hamiltonians.location(FakeDoF())        
-        @test_throws ArgumentError Hamiltonians.value(FakeDoF())        
+        @test_throws ArgumentError Hamiltonians.DoF_location(FakeDoF())        
+        @test_throws ArgumentError Hamiltonians.DoF_value(FakeDoF())        
     end
 
     include("test_HamiltonianIterators.jl")
