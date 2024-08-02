@@ -12,9 +12,9 @@ using TRExMC
 # Step 1: Define Parameters
 Lsize = 16
 Jex = 1.0
-Temp = 0.1Jex
+Temp = 1000Jex
 ham_params = Hamiltonians.BasicIsingParameters(Jex)
-metro_params = Parameters.MetropolisParameters(2^20, 2^10, [Temp])
+metro_params = Parameters.MetropolisParameters(2^16, 2^10, [Temp])
 
 # Step 2: Create the model
 latt = Lattices.CubicLattice2D(Lsize, Lsize)
